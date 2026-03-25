@@ -46,7 +46,7 @@ public class Placar {
         }
     }
 
-    @Override
+    @Override // anulando um método herdado
     public String toString() {
         return nomeTimeCasa + " [" + pontosCasa + "] x [" + pontosVisitante + "] " +
                 nomeTimeVisitante + " - Período: " + periodoQuarto;
