@@ -31,4 +31,28 @@ public class ProdutoController {
         URI uri = URI.create("/produto/" + novo.getId());
         return ResponseEntity.created(uri).body(novo);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remove(@PathVariable Long id){
+        if (service.remove(id)){
+            return ResponseEntity.noContent().build(); // sucesso - 204
+        }
+        else {
+            return ResponseEntity.notFound().build(); // erro cliente - 404
+        }
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Produto> atualiza(@PathVariable Long id,
+                                            @RequestBody Produto novo){
+        Produto resposta = service.atualiza(id, novo);
+        if (resposta != null){
+            // atualizou e retornou produto atualizado
+            return ResponseEntity.ok(resposta); // 200 ok
+        }
+        else {
+            // não atualizou
+            return ResponseEntity.notFound().build(); // 404 notFound
+        }
+    }
 }
