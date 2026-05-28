@@ -3,11 +3,9 @@ package dc.unifacef.bd.controller;
 import dc.unifacef.bd.model.Produto;
 import dc.unifacef.bd.service.ProdutoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +31,15 @@ public class ProdutoController {
             return ResponseEntity.notFound().build(); // statusCode - 404 - produto não existe
         }
         return ResponseEntity.ok(prod); // statusCode - 200 - retorna produto encontrado
+    }
+    @PostMapping
+    public ResponseEntity<Produto> salva(@RequestBody Produto produto){
+        Produto novo = service.salva(produto);
+        if (novo != null) {
+            // vamos montar uma URI - Uniform Resource Identifier
+            URI uri = URI.create("/produtos/" + novo.getId());
+            return ResponseEntity.created(uri).body(novo); // statusCode: 201
+        }
+        return ResponseEntity.noContent().build(); // statusCode: 204
     }
 }
