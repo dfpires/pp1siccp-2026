@@ -42,4 +42,22 @@ public class ProdutoController {
         }
         return ResponseEntity.noContent().build(); // statusCode: 204
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remove(@PathVariable Long id){
+        if (service.remove(id)){
+            return ResponseEntity.noContent().build(); // 204
+        }
+        return ResponseEntity.notFound().build(); // 404
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Produto> atualiza(@PathVariable Long id,
+                                            @RequestBody Produto alterado){
+        Produto resposta = service.atualiza(id, alterado);
+        if (resposta != null){
+            return ResponseEntity.ok(resposta);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
