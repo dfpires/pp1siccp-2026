@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"C:\\\\Users\\\\danie\\\\Meu Drive\\\\aulas\\\\fatec\\\\POO\\\\poo-2026d\\\\produtos-db-relacionamento\"; Get-ChildItem -Recurse -Force | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\\(\\(Get-Location\\).Path + \"\\\\\"\\), \"\"\\) } | Sort-Object)"
+    ]
+  }
+}
